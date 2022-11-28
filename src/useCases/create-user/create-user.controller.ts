@@ -1,8 +1,12 @@
 import { Request, Response } from 'express';
 import { CreateUserUseCase } from './create-user.usecase';
 
+import { logger } from '../../utils/logger';
+
 class CreateUserController {
     async handle(request: Request, response: Response) {
+        logger.info('User is being created');
+        
         try {
             const data = request.body;
         
@@ -12,7 +16,9 @@ class CreateUserController {
 
             return response.json(result);
         } catch(err: any) {
-            return response.status(400).json(err.message);
+            logger.error(err.stack);
+
+            return response.status(err.statusCode).json(err.message);
         }
     }
 }
