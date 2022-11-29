@@ -6,7 +6,7 @@ import { IPasswordEncryption } from '../../../../shared/encryption/password.encr
 import { ParameterRequiredError } from '../../../../errors/parameter-required.error';
 import { CustomError } from '../../../../errors/custom.error';
 
-type IUserRequest = {
+type UserRequest = {
     name: string;
     username: string;
     password: string;
@@ -18,7 +18,7 @@ class CreateUserUseCase {
         private passwordEncryption: IPasswordEncryption
     ) {}
 
-    async execute(data: IUserRequest) {
+    async execute(data: UserRequest) {
 
         if (!data.username || !data.password) {
             throw new ParameterRequiredError('Username/password is required', 422);

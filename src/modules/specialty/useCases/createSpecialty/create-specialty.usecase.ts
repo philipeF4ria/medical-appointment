@@ -1,0 +1,21 @@
+import { SpecialtyEntity } from "../../entities/specialty.entity";
+import { ISpecialtyRepository } from "../../repositories/specialty.repository";
+
+type SpecialtyRequest = {
+    name: string;
+    description: string;
+}
+
+class CreateSpecialtyUseCase {
+    constructor(private specialtyRepository: ISpecialtyRepository){}
+
+    async execute(data: SpecialtyRequest) {
+        const specialty = SpecialtyEntity.create(data);
+
+        const specialtyCreated = await this.specialtyRepository.save(specialty);
+
+        return specialtyCreated;
+    }
+}
+
+export { CreateSpecialtyUseCase }
