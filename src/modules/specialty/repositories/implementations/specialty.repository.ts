@@ -15,6 +15,16 @@ class SpecialtyRepository implements ISpecialtyRepository {
 
         return specialty;
     }
+
+    async findByName(name: string): Promise<Specialty | undefined> {
+        const specialty = await prismaClient.specialty.findUnique({
+            where: {
+                name,
+            },
+        });
+
+        return specialty || undefined;
+    }
    
 }
 

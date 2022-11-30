@@ -20,7 +20,7 @@ class CreateSpecialtyController {
         } catch (err: any) {
             logger.error(err.stack);
 
-            return response.status(err.statusCode).json({
+            return response.json({
                 error: err.message,
             });
         }
