@@ -8,7 +8,12 @@
     "paths": {
         "/specialties": {
             "post": {
-                "tags": ["Specialty"],
+                "tags": ["Specialties"],
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
                 "description": "Cadastro de especialidades",
                 "requestBody": {
                     "content": {
@@ -28,6 +33,29 @@
                                 }
                             }
                         }
+                    }
+                }
+            }
+        },
+        "/login": {
+            "post": {
+                "tags": ["Users"],
+                "description": "Autenticação do usuário",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/LoginRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Token gerado com sucesso"
+                    },
+                    "401": {
+                        "description": "Mensagem de erro"
                     }
                 }
             }
@@ -76,6 +104,30 @@
                     }
                 },
                 "required": ["name", "description"]
+            },
+            "LoginRequest": {
+                "type": "object",
+                "properties": {
+                    "username": {
+                        "type": "object",
+                        "description": "username de login",
+                        "example": "USERNAME_TEST"
+                    },
+                    "password": {
+                        "type": "string",
+                        "description": "password de login",
+                        "example": "PASSWORD_TEST"
+                    }
+                }
+            }
+        },
+        "securitySchemes": {
+            "bearerAuth": {
+                "description": "Autenticação do API",
+                "type": "http",
+                "scheme": "bearer",
+                "bearerFormat": "JWT",
+                "tokenUrl": "http://localhost:3333/login"
             }
         }
     }

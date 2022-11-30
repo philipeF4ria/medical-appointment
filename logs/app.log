@@ -28,3 +28,7 @@
 {"level":"info","message":"User is being authenticated","timestamp":"30/11/2022 16:01:09"}
 {"level":"info","message":"User is being authenticated","timestamp":"30/11/2022 16:54:14"}
 {"level":"info","message":"User is being authenticated","timestamp":"30/11/2022 18:26:54"}
+{"level":"info","message":"User is being authenticated","timestamp":"30/11/2022 18:51:35"}
+{"level":"error","message":"Username/password incorrect\n    at AuthenticateUserUseCase.<anonymous> (/Users/philipefaria/Desktop/Cursos/NodeJSDL/medical_appointment/src/modules/users/useCases/authenticate-user/authenticate-user.usecase.ts:33:19)\n    at Generator.next (<anonymous>)\n    at fulfilled (/Users/philipefaria/Desktop/Cursos/NodeJSDL/medical_appointment/src/modules/users/useCases/authenticate-user/authenticate-user.usecase.ts:5:58)","timestamp":"30/11/2022 18:51:35"}
+{"level":"info","message":"User is being authenticated","timestamp":"30/11/2022 18:52:20"}
+{"level":"info","message":"User is being authenticated","timestamp":"30/11/2022 19:02:19"}
