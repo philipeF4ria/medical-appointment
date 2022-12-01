@@ -2,7 +2,7 @@ import { sign, verify } from 'jsonwebtoken';
 import { createHmac } from 'crypto';
 
 import { User } from '../../../modules/users/entities/user.entity';
-import { IToken } from '../token';
+import { IToken, TokenUser } from '../token';
 
 class JWT implements IToken {
     private TOKEN_SECRET = process.env.SECRET_KEY_TOKEN || '';
@@ -26,12 +26,12 @@ class JWT implements IToken {
         return token;
     }
 
-    validate(token: string): boolean {
+    validate(token: string): TokenUser | null {
         try {
-            verify(token, this.TokenSecretCrypto);
-            return true;
+            const tokenUser =verify(token, this.TokenSecretCrypto) as TokenUser;
+            return tokenUser;
         } catch(err) {
-            return false;
+            return null;
         }
     }
 }

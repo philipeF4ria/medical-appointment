@@ -28,6 +28,8 @@ const ensureAuthenticate = (
     const verifyToken = jwt.validate(token);
 
     if (verifyToken) {
+        request.userId = verifyToken.sub;
+        
         return next();
     }
 

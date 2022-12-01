@@ -9,6 +9,9 @@ class UserMemoryRepository implements IUserRepository {
     constructor() {
         this.users = [];
     }
+    findById(id: string): Promise<User | undefined> {
+        throw new Error('Method not implemented.');
+    }
 
     static getInstance() {
         if (!UserMemoryRepository.instance) {

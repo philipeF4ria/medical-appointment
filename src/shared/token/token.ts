@@ -1,8 +1,12 @@
 import { User } from "../../modules/users/entities/user.entity"
 
-interface IToken {
-    create(user: User): string;
-    validate(token: string): boolean;
+type TokenUser = {
+    sub: string;
 }
 
-export { IToken }
+interface IToken {
+    create(user: User): string;
+    validate(token: string): TokenUser | null;
+}
+
+export { TokenUser, IToken }
