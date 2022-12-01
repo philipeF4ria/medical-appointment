@@ -5,7 +5,7 @@ type DoctorProps = {
     crm: string;
     email: string;
     userId: string;
-    especialityId: string;
+    specialityId: string;
 }
 
 class Doctor {
@@ -13,14 +13,14 @@ class Doctor {
     crm: string;
     email: string;
     userId: string;
-    especialityId: string;
+    specialityId: string;
 
     private constructor(props: DoctorProps) {
         this.id = randomUUID();
         this.crm = props.crm;
         this.email = props.email;
         this.userId = props.userId;
-        this.especialityId = props.especialityId;
+        this.specialityId = props.specialityId;
     }
 
     static create(props: DoctorProps) {
