@@ -5,6 +5,7 @@ import { IUserRepository } from "../../../users/repositories/user.repository";
 import { IDoctorRepository } from '../../repositories/doctor.repository';
 
 import { CustomError } from "../../../../errors/custom.error";
+import { ISpecialtyRepository } from "../../../specialty/repositories/specialty.repository";
 
 type CreateDoctorRequest = {
     username: string;
@@ -18,7 +19,8 @@ type CreateDoctorRequest = {
 class CreateDoctorUseCase {
     constructor(
         private userRepository: IUserRepository, 
-        private doctorRepository: IDoctorRepository
+        private doctorRepository: IDoctorRepository,
+        private specialtyRepository: ISpecialtyRepository,
     ){}
 
     async execute(data: CreateDoctorRequest) {
@@ -32,6 +34,12 @@ class CreateDoctorUseCase {
 
         if (existUser) {
             throw new CustomError('Username already exists', 400);
+        }
+
+        const specialty = await this.specialtyRepository.findById(data.specialtyId);
+
+        if (!specialty) {
+            throw new CustomError('Specialty does not exists', 400);
         }
 
         const userCreated = await this.userRepository.save(user);

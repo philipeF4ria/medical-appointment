@@ -6,7 +6,7 @@ type ISpecialty = {
     description: string;
 }
 
-class SpecialtyEntity {
+class Specialty {
     id: string;
     name: string;
     description: string;
@@ -24,9 +24,9 @@ class SpecialtyEntity {
             throw new CustomError('Specialty name is required', 400);
         }
 
-        const specialty = new SpecialtyEntity(props);
+        const specialty = new Specialty(props);
         return specialty;
     }
 }
 
-export { SpecialtyEntity }
+export { Specialty }
