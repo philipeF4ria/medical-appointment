@@ -31,7 +31,7 @@ class CreateDoctorUseCase {
         const existUser = await this.userRepository.findByUsername(data.username);
 
         if (existUser) {
-            throw new CustomError('Username already exists');
+            throw new CustomError('Username already exists', 400);
         }
 
         const userCreated = await this.userRepository.save(user);

@@ -29,7 +29,7 @@ class Doctor {
         }
 
         if (props.crm.length !== 6) {
-            throw new CustomError('CRM length is incorrect', 400);
+            throw new CustomError('CRM length is incorrect');
         }
 
         if (!props.email) {
