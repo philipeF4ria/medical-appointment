@@ -2,6 +2,8 @@ import { User } from "../../../users/entities/user.entity";
 import { Doctor } from "../../entities/doctor.entity";
 
 import { IUserRepository } from "../../../users/repositories/user.repository";
+import { IDoctorRepository } from '../../repositories/doctor.repository';
+
 import { CustomError } from "../../../../errors/custom.error";
 
 type CreateDoctorRequest = {
@@ -41,7 +43,15 @@ class CreateDoctorUseCase {
             userId: userCreated.id,
         });
 
-        return doctor;
+        const crmExists = await this.doctorRepository.findByCRM(data.crm);
+
+        if (crmExists) {
+            throw new CustomError('CRM already exists', 400);
+        }
+
+        const doctorCreated = await this.doctorRepository.save(doctor);
+
+        return doctorCreated;
     }
 }
 

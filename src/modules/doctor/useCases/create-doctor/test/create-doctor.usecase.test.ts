@@ -3,6 +3,7 @@ import { randomUUID } from 'crypto';
 
 import { CreateDoctorRequest, CreateDoctorUseCase } from '../create-doctor.usecase';
 import { UserMemoryRepository } from '../../../../users/repositories/implementations/user.memory.repository';
+import { DoctorMemoryRepository } from '../../../repositories/implementations/doctor-memory.repository'
 
 describe('Create Doctor Use Case', () => {
     test('Should be able to create a new Doctor', async () => {
