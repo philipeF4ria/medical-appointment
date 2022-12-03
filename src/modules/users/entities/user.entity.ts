@@ -1,5 +1,7 @@
 import { randomUUID } from 'crypto';
 
+import { ParameterRequiredError } from '../../../errors/parameter-required.error';
+
 type IUser = {
     name: string;
     username: string;
@@ -14,6 +16,10 @@ class User {
     isAdmin: boolean;
 
     private constructor(props: IUser) {
+        if (!props.username || !props.password) {
+            throw new ParameterRequiredError('Username/Password is required');
+        }
+
         this.name = props.name;
         this.username = props.username;
         this.password = props.password;
