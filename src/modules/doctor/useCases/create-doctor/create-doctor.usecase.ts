@@ -24,7 +24,7 @@ class CreateDoctorUseCase {
     ){}
 
     async execute(data: CreateDoctorRequest) {
-        const user = User.create({
+        const user = await User.create({
             name: data.name,
             username: data.username,
             password: data.username,

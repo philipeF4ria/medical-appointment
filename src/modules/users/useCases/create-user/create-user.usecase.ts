@@ -1,7 +1,6 @@
 import { User } from '../../entities/user.entity';
 
 import { IUserRepository } from '../../repositories/user.repository';
-import { IPasswordEncryption } from '../../../../shared/encryption/password.encryption';
 
 import { ParameterRequiredError } from '../../../../errors/parameter-required.error';
 import { CustomError } from '../../../../errors/custom.error';
@@ -15,7 +14,6 @@ type UserRequest = {
 class CreateUserUseCase {
     constructor(
         private userRepository: IUserRepository,
-        private passwordEncryption: IPasswordEncryption
     ) {}
 
     async execute(data: UserRequest) {
@@ -30,11 +28,7 @@ class CreateUserUseCase {
             throw new CustomError('Username already exists', 400, 'USER_EXISTS_ERROR');
         }
 
-        const passwordHash = await this.passwordEncryption.hash(data.password);
-
-        const user = User.create(data);
-
-        user.password = passwordHash;
+        const user = await User.create(data);
 
         const userCreated = await this.userRepository.save(user);
     

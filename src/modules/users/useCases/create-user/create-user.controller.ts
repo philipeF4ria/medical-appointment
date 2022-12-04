@@ -4,12 +4,10 @@ import { CreateUserUseCase } from './create-user.usecase';
 import { logger } from '../../../../utils/logger';
 
 import { IUserRepository } from '../../repositories/user.repository';
-import { IPasswordEncryption } from '../../../../shared/encryption/password.encryption';
 
 class CreateUserController {
     constructor(
         private userRepository: IUserRepository,
-        private passwordEncryption: IPasswordEncryption
     ) {}
 
     async handle(request: Request, response: Response) {
@@ -18,7 +16,7 @@ class CreateUserController {
         try {
             const data = request.body;
         
-            const useCase = new CreateUserUseCase(this.userRepository, this.passwordEncryption);
+            const useCase = new CreateUserUseCase(this.userRepository);
 
             const result = await useCase.execute(data);
 
