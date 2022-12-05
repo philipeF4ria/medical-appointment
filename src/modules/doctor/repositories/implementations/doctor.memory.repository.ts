@@ -10,8 +10,8 @@ class DoctorMemoryRepository implements IDoctorRepository {
         return data;
     }
 
-    async findByCRM(crm: string): Promise<Doctor | undefined> {
-        return this.items.find(doctor => doctor.crm === crm) || undefined;
+    async findByCRM(crm: string): Promise<Doctor | null> {
+        return this.items.find(doctor => doctor.crm === crm) || null;
     }
 
 }

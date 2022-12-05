@@ -4,7 +4,7 @@ import { randomUUID } from 'crypto';
 import { CreateDoctorRequest, CreateDoctorUseCase } from '../create-doctor.usecase';
 
 import { UserMemoryRepository } from '../../../../users/repositories/implementations/user.memory.repository';
-import { DoctorMemoryRepository } from '../../../repositories/implementations/doctor-memory.repository'
+import { DoctorMemoryRepository } from '../../../repositories/implementations/doctor.memory.repository'
 import { SpecialtyMemoryRepository } from '../../../../specialty/repositories/implementations/specialty.memory.repository';
 
 import { Specialty } from '../../../../specialty/entities/specialty.entity';
