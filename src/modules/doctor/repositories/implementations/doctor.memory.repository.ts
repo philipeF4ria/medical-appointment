@@ -14,6 +14,10 @@ class DoctorMemoryRepository implements IDoctorRepository {
         return this.items.find(doctor => doctor.crm === crm) || null;
     }
 
+    async findByUserId(userId: string): Promise<Doctor | null> {
+        return this.items.find(doctor => doctor.userId === userId) || null;
+    }
+
 }
 
 export { DoctorMemoryRepository }

@@ -14,17 +14,24 @@ class CreateDoctorController {
     ){}
 
     async handle(request: Request, response: Response) {
-        const data = request.body;
+        try {
+            const data = request.body;
 
-        const createDoctorUseCase = new CreateDoctorUseCase(
-            this.userRepository,
-            this.doctorRepository,
-            this.specialtyRepository
-        );
+            const createDoctorUseCase = new CreateDoctorUseCase(
+                this.userRepository,
+                this.doctorRepository,
+                this.specialtyRepository
+            );
 
-        const result = await createDoctorUseCase.execute(data);
+            const result = await createDoctorUseCase.execute(data);
 
-        return response.json(data);
+            return response.json(result);
+        } catch(err: any) {
+            
+            return response.status(err.statusCode).json({
+                error: err.message,
+            });
+        }
     }
 }
 
