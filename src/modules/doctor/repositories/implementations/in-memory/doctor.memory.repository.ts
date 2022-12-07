@@ -1,5 +1,5 @@
-import { Doctor } from '../../entities/doctor.entity';
-import { IDoctorRepository } from '../doctor.repository';
+import { Doctor } from '../../../entities/doctor.entity';
+import { IDoctorRepository } from '../../doctor.repository';
 
 class DoctorMemoryRepository implements IDoctorRepository {
     private items: Doctor[] = []

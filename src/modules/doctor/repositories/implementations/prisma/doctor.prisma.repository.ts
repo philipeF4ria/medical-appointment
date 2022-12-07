@@ -1,10 +1,13 @@
-import { prismaClient } from '../../../../infra/database/prisma.config';
+import { prismaClient } from '../../../../../infra/database/prisma.config';
 
-import { Doctor } from '../../entities/doctor.entity';
-import { DoctorMapper } from '../../mapper/create-doctor.map';
-import { IDoctorRepository } from '../doctor.repository';
+import { Doctor } from '../../../entities/doctor.entity';
+import { DoctorMapper } from '../../../mapper/create-doctor.map';
+import { IDoctorRepository } from '../../doctor.repository';
 
 class DoctorPrismaRepository implements IDoctorRepository {
+    findByUserId(userId: string): Promise<Doctor | null> {
+        throw new Error('Method not implemented.');
+    }
     async save(data: Doctor): Promise<Doctor> {
         const doctor = await prismaClient.doctor.create({
             data: {

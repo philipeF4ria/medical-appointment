@@ -2,7 +2,7 @@ import { describe, test, expect } from 'vitest';
 import dayjs from 'dayjs';
 
 import { DoctorInfoRequest, CreateDoctorInfoUseCase } from '../create-doctor-info.usecase';
-import { DoctorMemoryRepository } from '../../../repositories/implementations/doctor.memory.repository';
+import { DoctorMemoryRepository } from '../../../repositories/implementations/in-memory/doctor.memory.repository';
 
 import { generateUUID } from '../../../../../utils/generateUUID';
 

@@ -4,7 +4,7 @@ import {
 
 import {
     DoctorPrismaRepository
-} from '../../repositories/implementations/doctor.prisma.repository';
+} from '../../repositories/implementations/prisma/doctor.prisma.repository';
 
 import {
     SpecialtyRepository
