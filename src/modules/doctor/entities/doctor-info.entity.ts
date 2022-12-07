@@ -27,8 +27,12 @@ class DoctorInfo {
             throw new CustomError('Invalid duration');
         }
 
-        if (!validateTime(props.startAt) || !validateTime(props.endAt)) {
-            throw new CustomError('Invalid date')
+        if (!validateTime(props.startAt)) {
+            throw new CustomError('Invalid startAt')
+        }
+
+        if (!validateTime(props.endAt)) {
+            throw new CustomError('Invalid endAt')
         }
 
         if (!compareEndTimeIsAfter(props.startAt, props.endAt)) {
