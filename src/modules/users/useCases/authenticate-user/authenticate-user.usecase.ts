@@ -18,19 +18,19 @@ class AuthenticateUserUseCase {
 
     async execute({ username, password }: AuthenticateRequest) {
         if (!username || !password) {
-            throw new CustomError('Username/password incorrect', 401);
+            throw new CustomError('Username/password incorrect - nao mandou senha ou username', 401);
         }
 
         const user = await this.userRepository.findByUsername(username);
 
         if (!user) {
-            throw new CustomError('Username/password incorrect', 401);
+            throw new CustomError('Username/password incorrect - user nao existe', 401);
         }
 
         const comparePassword = await this.passwordEncryption.compare(password, user.password);
 
         if (!comparePassword) {
-            throw new CustomError('Username/password incorrect', 401);
+            throw new CustomError('Username/password incorrect - senha incorreta', 401);
         }
 
         const tokenGenerated = this.token.create(user);

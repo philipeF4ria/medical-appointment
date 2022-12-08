@@ -12,16 +12,22 @@ class CreateDoctorInfoController {
     ){}
 
     async handle(request: Request, response: Response): Promise<Response> {
-        const { body, userId } = request;
+        try {
+            const { body, userId } = request;
 
-        const createDoctorInfoUseCase = new CreateDoctorInfoUseCase(
-            this.doctorRepository, 
-            this.doctorInfoRepository
-        );
+            const createDoctorInfoUseCase = new CreateDoctorInfoUseCase(
+                this.doctorRepository, 
+                this.doctorInfoRepository
+            );
 
-        const result = await createDoctorInfoUseCase.execute(body, userId);
+            const result = await createDoctorInfoUseCase.execute(body, userId);
 
         return response.json(result);
+        } catch(err: any) {
+            return response.json({
+                error: err.message
+            });
+        }
     }
 }
 

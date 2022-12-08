@@ -27,7 +27,7 @@ class CreateDoctorUseCase {
         const user = await User.create({
             name: data.name,
             username: data.username,
-            password: data.username,
+            password: data.password,
         });
 
         const existUser = await this.userRepository.findByUsername(data.username);

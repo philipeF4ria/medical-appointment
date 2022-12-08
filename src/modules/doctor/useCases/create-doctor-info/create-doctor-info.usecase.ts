@@ -22,7 +22,7 @@ class CreateDoctorInfoUseCase {
         const doctorByUserId = await this.doctorRepository.findByUserId(userId);
 
         if (!doctorByUserId) {
-            throw new CustomError('Doctor does not exists');
+            throw new CustomError('Doctor does not exists', 401);
         }
 
         const doctorInfo = DoctorInfo.create({
@@ -30,7 +30,7 @@ class CreateDoctorInfoUseCase {
             doctorId: doctorByUserId.id
         });
 
-        const doctorInfoCreated = await this.doctorInfoRepository.save(doctorInfo);
+        const doctorInfoCreated = await this.doctorInfoRepository.saveOrUpdate(doctorInfo);
 
         return doctorInfoCreated;
     }

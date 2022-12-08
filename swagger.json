@@ -82,6 +82,34 @@
                     }
                 }
             }
+        },
+        "/doctor-info": {
+            "post": {
+                "description": "Cadastro de informação de um médico",
+                "tags": ["doctor-info"],
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/DoctorInfoRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Informação do médico criado com sucesso"
+                    },
+                    "401": {
+                        "description": "Erro ao cadastrar a informação do médico"
+                    }
+                }
+            }
         }
     },
     "components": {
@@ -176,6 +204,31 @@
                         "type": "string",
                         "description": "Especialidade do médico",
                         "format": "uuid"
+                    }
+                }
+            },
+            "DoctorInfoRequest": {
+                "type": "object",
+                "properties": {
+                    "startAt": {
+                        "type": "string",
+                        "description": "Horário de início do atendimento",
+                        "example": "10:00"
+                    },
+                    "endAt": {
+                        "type": "string",
+                        "description": "Horário de término do atendimento",
+                        "example": "12:00"
+                    },
+                    "duration": {
+                        "type": "number",
+                        "description": "Duração do atendimento",
+                        "example": "40"
+                    },
+                    "price": {
+                        "type": "number",
+                        "description": "Preço do atendimento",
+                        "example": "150"
                     }
                 }
             }

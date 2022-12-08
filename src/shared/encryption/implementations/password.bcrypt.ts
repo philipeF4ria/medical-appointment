@@ -7,7 +7,7 @@ class PasswordBcrypt implements IPasswordEncryption {
         return bcrypt.hash(password, 10);
     }
 
-    compare(password: string, passwordHash: string): Promise<boolean> {
+    async compare(password: string, passwordHash: string): Promise<boolean> {
         return bcrypt.compare(password, passwordHash);
     }
 }
