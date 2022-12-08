@@ -1,7 +1,7 @@
 import { Router } from 'express';
 
-import { ensureAuthenticate } from '../shared/http/ensure-authenticate-middleware';
-import { ensureAdmin } from '../shared/http/ensure-admin.middleware';
+import { ensureAuthenticate } from '../infra/shared/http/ensure-authenticate-middleware';
+import { ensureAdmin } from '../infra/shared/http/ensure-admin.middleware';
 
 
 import { createSpecialtyController } from '../modules/specialty/useCases/createSpecialty';

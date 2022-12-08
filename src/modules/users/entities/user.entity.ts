@@ -1,7 +1,7 @@
 import { randomUUID } from 'crypto';
 
 import { ParameterRequiredError } from '../../../errors/parameter-required.error';
-import { PasswordBcrypt } from '../../../shared/encryption/implementations/password.bcrypt';
+import { PasswordBcrypt } from '../../../infra/shared/encryption/implementations/password.bcrypt';
 
 type IUser = {
     name: string;

@@ -1,6 +1,6 @@
 import { UserPrismaRepository } from '../../repositories/implementations/user.prisma.repository';
-import { PasswordBcrypt } from '../../../../shared/encryption/implementations/password.bcrypt';
-import { JWT } from '../../../../shared/token/implementations/jwt';
+import { PasswordBcrypt } from '../../../../infra/shared/encryption/implementations/password.bcrypt';
+import { JWT } from '../../../../infra/shared/token/implementations/jwt';
 
 import { AuthenticateUserController } from './authenticate-user.controller';
 

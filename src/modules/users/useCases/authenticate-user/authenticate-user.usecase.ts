@@ -1,6 +1,6 @@
-import { IPasswordEncryption } from '../../../../shared/encryption/password.encryption';
+import { IPasswordEncryption } from '../../../../infra/shared/encryption/password.encryption';
 import { IUserRepository } from '../../repositories/user.repository';
-import { IToken } from '../../../../shared/token/token';
+import { IToken } from '../../../../infra/shared/token/token';
 
 import { CustomError } from '../../../../errors/custom.error';
 

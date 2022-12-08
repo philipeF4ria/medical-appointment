@@ -1,7 +1,7 @@
 import { Router } from 'express';
 
 import { createDoctorInfoController } from '../modules/doctor/useCases/create-doctor-info';
-import { ensureAuthenticate } from '../shared/http/ensure-authenticate-middleware';
+import { ensureAuthenticate } from '../infra/shared/http/ensure-authenticate-middleware';
 
 const doctorInfoRouter = Router();
 

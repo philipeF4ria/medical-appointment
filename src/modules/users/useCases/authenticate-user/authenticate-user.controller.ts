@@ -4,8 +4,8 @@ import { AuthenticateUserUseCase } from './authenticate-user.usecase';
 import { logger } from '../../../../utils/logger';
 
 import { IUserRepository } from '../../repositories/user.repository';
-import { IPasswordEncryption } from '../../../../shared/encryption/password.encryption';
-import { IToken } from '../../../../shared/token/token';
+import { IPasswordEncryption } from '../../../../infra/shared/encryption/password.encryption';
+import { IToken } from '../../../../infra/shared/token/token';
 
 class AuthenticateUserController {
     constructor(

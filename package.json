@@ -17,7 +17,8 @@
     "express": "^4.18.2",
     "jsonwebtoken": "^8.5.1",
     "swagger-ui-express": "^4.6.0",
-    "winston": "^3.8.2"
+    "winston": "^3.8.2",
+    "zod": "^3.19.1"
   },
   "devDependencies": {
     "@types/bcryptjs": "^2.4.2",

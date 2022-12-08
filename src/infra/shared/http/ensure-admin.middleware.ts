@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from 'express';
 
-import { UserPrismaRepository } from '../../modules/users/repositories/implementations/user.prisma.repository';
+import { UserPrismaRepository } from '../../../modules/users/repositories/implementations/user.prisma.repository';
 
 async function ensureAdmin(
     request: Request, 

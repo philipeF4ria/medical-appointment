@@ -1,7 +1,7 @@
 import { sign, verify } from 'jsonwebtoken';
 import { createHmac } from 'crypto';
 
-import { User } from '../../../modules/users/entities/user.entity';
+import { User } from '../../../../modules/users/entities/user.entity';
 import { IToken, TokenUser } from '../token';
 
 class JWT implements IToken {

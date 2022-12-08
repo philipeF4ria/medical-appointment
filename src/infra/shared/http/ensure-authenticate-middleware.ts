@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from 'express';
-import { CustomError } from '../../errors/custom.error';
-import { JWT } from '../../shared/token/implementations/jwt';
+import { CustomError } from '../../../errors/custom.error';
+import { JWT } from '../token/implementations/jwt';
 
 const ensureAuthenticate = (
     request: Request, 
