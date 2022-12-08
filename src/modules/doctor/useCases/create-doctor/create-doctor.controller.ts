@@ -28,7 +28,7 @@ class CreateDoctorController {
             return response.json(result);
         } catch(err: any) {
             
-            return response.status(err.statusCode).json({
+            return response.json({
                 error: err.message,
             });
         }
