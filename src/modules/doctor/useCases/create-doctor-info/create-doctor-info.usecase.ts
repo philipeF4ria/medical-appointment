@@ -1,8 +1,9 @@
-import { CustomError } from "../../../../errors/custom.error";
+import { CustomError } from '../../../../errors/custom.error';
 
-import { DoctorInfo } from "../../entities/doctor-info.entity";
+import { DoctorInfo } from '../../entities/doctor-info.entity';
 
-import { IDoctorRepository } from "../../repositories/doctor.repository";
+import { IDoctorInfoRepository } from '../../repositories/doctor-info.repository';
+import { IDoctorRepository } from '../../repositories/doctor.repository';
 
 type DoctorInfoRequest = {
     startAt: string;
@@ -12,7 +13,10 @@ type DoctorInfoRequest = {
 }
 
 class CreateDoctorInfoUseCase {
-    constructor(private doctorRepository: IDoctorRepository){}
+    constructor(
+        private doctorRepository: IDoctorRepository,
+        private doctorInfoRepository: IDoctorInfoRepository
+    ){}
 
     async execute(data: DoctorInfoRequest, userId: string) {
         const doctorByUserId = await this.doctorRepository.findByUserId(userId);
@@ -26,7 +30,9 @@ class CreateDoctorInfoUseCase {
             doctorId: doctorByUserId.id
         });
 
-        return doctorInfo;
+        const doctorInfoCreated = await this.doctorInfoRepository.save(doctorInfo);
+
+        return doctorInfoCreated;
     }
 }
 
