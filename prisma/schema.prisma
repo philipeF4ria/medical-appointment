@@ -11,24 +11,24 @@ datasource db {
 }
 
 model User {
-  id String @id @default(uuid())
-  name String
-  username String @unique
-  password String
-  isAdmin Boolean @default(false)
+  id        String   @id @default(uuid())
+  name      String
+  username  String   @unique
+  password  String
+  isAdmin   Boolean  @default(false)
   createdAt DateTime @default(now())
 
-  doctor Doctor?
+  doctor  Doctor?
   patient Patient?
 
   @@map("users ")
 }
 
 model Specialty {
-  id String @id @default(uuid())
-  name String @unique
+  id          String   @id @default(uuid())
+  name        String   @unique
   description String
-  createdAt DateTime @default(now())
+  createdAt   DateTime @default(now())
 
   doctor Doctor[]
 
@@ -36,42 +36,52 @@ model Specialty {
 }
 
 model Doctor {
-  id String @id @default(uuid())
+  id    String @id @default(uuid())
   email String @unique
-  crm String @unique
+  crm   String @unique
 
-  user User @relation(fields: [user_id], references: [id])
+  user    User   @relation(fields: [user_id], references: [id])
   user_id String @unique
 
-  specialty Specialty @relation(fields: [specialty_id], references: [id])
+  specialty    Specialty @relation(fields: [specialty_id], references: [id])
   specialty_id String
 
   doctorInfo DoctorInfo?
-  
-  createdAt DateTime @default(now())
+
+  createdAt      DateTime         @default(now())
+  DoctorSchedule DoctorSchedule[]
 
   @@map("doctors")
 }
 
 model DoctorInfo {
-  id String @id @default(uuid())
-  start_at String
-  end_at String
-  duration Int
-  price Decimal
-  doctor_id String @unique
-  doctor Doctor @relation(fields: [doctor_id], references: [id])
+  id        String  @id @default(uuid())
+  duration  Int
+  price     Decimal
+  doctor_id String  @unique
+  doctor    Doctor  @relation(fields: [doctor_id], references: [id])
 
   @@map("doctor_info")
 }
 
 model Patient {
-  id String @id @default(uuid())
-  document String @unique 
-  email String @unique
+  id       String @id @default(uuid())
+  document String @unique
+  email    String @unique
 
-  user User @relation(fields: [user_id], references: [id])
+  user    User   @relation(fields: [user_id], references: [id])
   user_id String @unique
 
   @@map("patients")
+}
+
+model DoctorSchedule {
+  id          String @id @default(uuid())
+  start_at    String
+  end_at      String
+  day_of_week Int
+  doctor_id   String
+  doctor      Doctor @relation(fields: [doctor_id], references: [id])
+
+  @@map("doctor_schedules")
 }
