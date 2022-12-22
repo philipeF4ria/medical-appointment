@@ -7,8 +7,6 @@ class DoctorInfoMapper {
             id: data.id,
             doctorId: data.doctor_id,
             duration: data.duration,
-            entAt: data.end_at,
-            startAt: data.start_at,
             price: Number(data.price),
         }
     }

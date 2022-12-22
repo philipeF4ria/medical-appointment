@@ -4,8 +4,6 @@ import { generateUUID } from '../../../utils/generateUUID';
 type DoctorInfoProps = {
     duration: number;
     price: number;
-    startAt: string;
-    endAt: string;
     doctorId: string;
 }
 
@@ -13,8 +11,6 @@ class DoctorInfo {
     id: string;
     duration: number;
     price: number;
-    startAt: string;
-    entAt:string;
     doctorId: string;
 
     private constructor(props: DoctorInfoProps) {
@@ -29,8 +25,6 @@ class DoctorInfo {
         this.id = generateUUID();
         this.duration = props.duration;
         this.price = props.price
-        this.startAt = props.startAt;
-        this.entAt = props.endAt;
         this.doctorId = props.doctorId;
     }
 

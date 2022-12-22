@@ -14,15 +14,11 @@ class DoctorInfoPrismaRepository implements IDoctorInfoRepository {
             },
             create: {
                 id: data.id,
-                start_at: data.startAt,
-                end_at: data.entAt,
                 duration:  data.duration,
                 price: data.price,
                 doctor_id: data.doctorId,
             },
             update: {
-                start_at: data.startAt,
-                end_at: data.entAt,
                 duration:  data.duration,
                 price: data.price,
             },
