@@ -5,6 +5,17 @@ import { DoctorMapper } from '../../../mapper/create-doctor.map';
 import { IDoctorRepository } from '../../doctor.repository';
 
 class DoctorPrismaRepository implements IDoctorRepository {
+    async findById(id: string): Promise<Doctor | null> {
+        const doctor = await prismaClient.doctor.findUnique({
+            where: {
+                id,
+            },
+        });
+
+        if (doctor) return DoctorMapper.prismaToEntityDoctor(doctor);
+        return null;
+    }
+
     async findByUserId(userId: string): Promise<Doctor | null> {
         const doctor = await prismaClient.doctor.findUnique({
             where: {
