@@ -15,4 +15,23 @@ function compareEndTimeIsAfter(startTime: string, endTime: string) {
     return formatDateHour(endTime).isAfter(formatDateHour(startTime));
 }
 
-export { validateTime, formatDateHour, compareEndTimeIsAfter }
+function getDayOfWeek(date: string) {
+    return dayjs(date).day();
+}
+
+function formatDate(date: Date, format: string) {
+    return dayjs(date).format(format);
+}
+
+function dateToString(date: Date) {
+    return dayjs(date).format('YYYY-MM-DD').toString();
+}
+
+export { 
+    validateTime, 
+    formatDateHour, 
+    compareEndTimeIsAfter, 
+    getDayOfWeek,
+    formatDate,
+    dateToString,
+}

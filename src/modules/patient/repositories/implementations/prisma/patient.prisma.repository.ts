@@ -36,6 +36,10 @@ class PatientPrismaRepository implements IPatientRepository {
 
         return null;
     }
+
+    async findByUserId(userId: string): Promise<Patient | null> {
+        throw new Error('This method does not implemented');
+    }
 }
 
 export { PatientPrismaRepository }

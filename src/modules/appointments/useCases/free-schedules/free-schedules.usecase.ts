@@ -1,3 +1,4 @@
+import dayjs from 'dayjs';
 import { CustomError } from '../../../../errors/custom.error';
 import { formatDate, getDayOfWeek } from '../../../../utils/date';
 
@@ -9,13 +10,22 @@ type FreeScheduleRequest = {
   date: string;
 }
 
+type FreeTime = {
+  time: string,
+}
+
+type FreeScheduleResponse = {
+  doctorId: string;
+  freeTime: FreeTime[];
+}
+
 class FreeSchedulesUseCase {
   constructor(
     private doctorScheduleRepository: IDoctorScheduleRepository,
     private appointmentRepository: IAppointmentRepository,
   ){}
 
-  async execute(data: FreeScheduleRequest) {
+  async execute(data: FreeScheduleRequest): Promise<FreeScheduleResponse> {
     if (!data.doctorId) {
       throw new CustomError('Doctor is required', 400);
     }
@@ -35,14 +45,41 @@ class FreeSchedulesUseCase {
       throw new CustomError('Doctor does not attend that day', 400);
     }
 
-    // const formattedDate = formatDate(data.date, 'YYYY-MM-DD');
-
-    const result = await this.appointmentRepository.findAllSchedulesByDoctorAndDate(
+    const appointmentsByDoctorAndDate = await this.appointmentRepository.findAllSchedulesByDoctorAndDate(
       data.doctorId, 
       data.date
     );
 
-    return result;
+    const startAt = doctorSchedule.startAt;
+    const endAt = doctorSchedule.endAt;
+    const duration = 30;
+
+    let timeNow = startAt;
+
+    const freeTime: FreeTime[] = []
+    
+    while(timeNow <= endAt) {
+
+      const existsAppointment = appointmentsByDoctorAndDate.find(appointment => {
+        const appointmentDateFormat = formatDate(appointment.date, 'HH:mm');
+
+        return appointmentDateFormat === timeNow;
+      });
+
+      if (!existsAppointment) {
+        freeTime.push({
+          time: timeNow
+        });
+      }
+
+      timeNow = dayjs(data.date + timeNow).add(duration, 'minute').format('HH:mm');
+
+    }
+    
+    return {
+      doctorId: data.doctorId,
+      freeTime,
+    }
   }
 }
 
