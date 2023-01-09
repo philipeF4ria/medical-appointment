@@ -1,5 +1,5 @@
 import { DoctorSchedule } from '../entities/doctor-schedule.entity';
-import { DoctorSchedule as DoctorSchedulePrisma } from '@prisma/client';
+import { Doctor, DoctorInfo, DoctorSchedule as DoctorSchedulePrisma } from '@prisma/client';
 import { generateUUID } from '../../../utils/generateUUID';
 
 type DoctorScheduleWeek = {
@@ -7,6 +7,11 @@ type DoctorScheduleWeek = {
     endAt: string;
     dayOfWeek: number;
     doctorId: string;
+    doctor: {
+        doctorInfo: {
+            duration: number,
+        },
+    };
 }
 
 class DoctorScheduleMapper {
@@ -26,12 +31,20 @@ class DoctorScheduleMapper {
         return doctorSchedulePrisma;
     }
 
-    static prismaToEntity(data: DoctorSchedulePrisma): DoctorScheduleWeek {
+    static prismaToEntity(
+        data: DoctorSchedulePrisma & 
+        { doctor: Doctor & { doctorInfo: DoctorInfo | null } }
+    ): DoctorScheduleWeek {
         return {
             doctorId: data.doctor_id,
             startAt: data.start_at,
             endAt: data.end_at,
             dayOfWeek: data.day_of_week,
+            doctor: {
+                doctorInfo: {
+                    duration: data.doctor.doctorInfo?.duration || 0,
+                },
+            },
         }
     }
 }

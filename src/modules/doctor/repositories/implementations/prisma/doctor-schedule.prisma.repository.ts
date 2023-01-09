@@ -13,6 +13,13 @@ class DoctorScheduleRepository implements IDoctorScheduleRepository {
             doctor_id: doctorId,
           },
         },
+        include: {
+          doctor: {
+            include: {
+              doctorInfo: true,
+            },
+          },
+        },
       });
 
       if (result) return DoctorScheduleMapper.prismaToEntity(result);

@@ -52,9 +52,15 @@ class FreeSchedulesUseCase {
 
     const startAt = doctorSchedule.startAt;
     const endAt = doctorSchedule.endAt;
-    const duration = 30;
+
+    const duration = doctorSchedule.doctor.doctorInfo.duration;
 
     let timeNow = startAt;
+
+    console.log({
+      startAt,
+      endAt,
+    });
 
     const freeTime: FreeTime[] = []
     
@@ -73,7 +79,6 @@ class FreeSchedulesUseCase {
       }
 
       timeNow = dayjs(data.date + timeNow).add(duration, 'minute').format('HH:mm');
-
     }
     
     return {
