@@ -27,6 +27,10 @@ function dateToString(date: Date) {
     return dayjs(date).format('YYYY-MM-DD').toString();
 }
 
+function toDate(date: Date) {
+    return dayjs(date).toDate();
+}
+
 export { 
     validateTime, 
     formatDateHour, 
@@ -34,4 +38,5 @@ export {
     getDayOfWeek,
     formatDate,
     dateToString,
+    toDate,
 }

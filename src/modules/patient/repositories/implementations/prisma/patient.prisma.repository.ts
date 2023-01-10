@@ -38,7 +38,17 @@ class PatientPrismaRepository implements IPatientRepository {
     }
 
     async findByUserId(userId: string): Promise<Patient | null> {
-        throw new Error('This method does not implemented');
+        const patient = await prismaClient.patient.findFirst({
+            where: {
+                user_id: userId,
+            },
+            include: {
+                user: true,
+            },
+        });
+
+        if (patient) return PatientMapper.prismaToEntity(patient);
+        return null;
     }
 }
 
