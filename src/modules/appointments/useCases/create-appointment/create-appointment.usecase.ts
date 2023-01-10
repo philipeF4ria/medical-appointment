@@ -6,7 +6,7 @@ import {
 import { IAppointmentRepository } from '../../repositories/appointment.repository';
 
 import { CustomError } from '../../../../errors/custom.error';
-import { dateToString, formatDate, getDayOfWeek, toDate } from '../../../../utils/date';
+import { dateToString, formatDate, formatDateUTC, getDayOfWeek, toDate } from '../../../../utils/date';
 import { Appointment } from '../../entities/appointment.entity';
 
 type CreateAppointmentRequest = {
@@ -46,7 +46,7 @@ class CreateAppointmentUseCase {
       throw new CustomError('Doctor does not attend that day', 400);
     }
 
-    const dateFormat = formatDate(data.date, 'YYYY-MM-DD HH:mm');
+    const dateFormat = formatDateUTC(data.date, 'YYYY-MM-DD HH:mm');
 
     const existsAppointmentDoctor = await this.appointmentRepository.findAppointmentByDoctorAndDatetime(
       doctorExists.id,
