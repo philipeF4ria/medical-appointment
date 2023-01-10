@@ -48,12 +48,12 @@ class CreateAppointmentUseCase {
 
     const dateFormat = formatDate(data.date, 'YYYY-MM-DD HH:mm');
 
-    const existsAppointment = await this.appointmentRepository.findAllSchedulesByDoctorAndDate(
+    const existsAppointmentDoctor = await this.appointmentRepository.findAppointmentByDoctorAndDatetime(
       doctorExists.id,
       dateFormat
     );
 
-    if (existsAppointment) {
+    if (existsAppointmentDoctor) {
       throw new CustomError('There is already an appointment for this time');
     }
 
