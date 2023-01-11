@@ -3,7 +3,9 @@ import { IPatientRepository } from '../../patient.repository';
 import { Patient } from '../../../entities/patient.entity';
 
 import { prismaClient } from '../../../../../infra/database/prisma.config';
+
 import { PatientMapper } from '../../../mapper/patient.map';
+import { PatientWithUserDTO } from '../../../dtos/patient.dto';
 
 class PatientPrismaRepository implements IPatientRepository {
     async save(data: Patient): Promise<Patient> {
@@ -37,7 +39,7 @@ class PatientPrismaRepository implements IPatientRepository {
         return null;
     }
 
-    async findByUserId(userId: string): Promise<Patient | null> {
+    async findByUserId(userId: string): Promise<PatientWithUserDTO | null> {
         const patient = await prismaClient.patient.findFirst({
             where: {
                 user_id: userId,
@@ -47,7 +49,7 @@ class PatientPrismaRepository implements IPatientRepository {
             },
         });
 
-        if (patient) return PatientMapper.prismaToEntity(patient);
+        if (patient) return PatientMapper.prismaToEntityIncludesUser(patient);
         return null;
     }
 }
