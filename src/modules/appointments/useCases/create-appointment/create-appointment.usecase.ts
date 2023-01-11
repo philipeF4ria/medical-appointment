@@ -8,6 +8,7 @@ import { IAppointmentRepository } from '../../repositories/appointment.repositor
 import { CustomError } from '../../../../errors/custom.error';
 import { dateToString, formatDate, formatDateUTC, getDayOfWeek, toDate } from '../../../../utils/date';
 import { Appointment } from '../../entities/appointment.entity';
+import { IMailProvider } from '../../../../infra/providers/mail/mail.provider';
 
 type CreateAppointmentRequest = {
   doctorId: string;
@@ -20,6 +21,7 @@ class CreateAppointmentUseCase {
     private doctorRepository: IDoctorRepository,
     private doctorScheduleRepository: IDoctorScheduleRepository,
     private appointmentRepository: IAppointmentRepository,
+    private mailProvider: IMailProvider,
   ) {}
 
   async execute(data: CreateAppointmentRequest, userId: string) {
@@ -73,6 +75,17 @@ class CreateAppointmentUseCase {
     });
 
     await this.appointmentRepository.save(appointment);
+    await this.mailProvider.sendMail({
+      to: patientExists.email,
+      from: 'Agendamento de Consulta <noreplay@agenday.com.br>',
+      subject: 'Agendamento confirmado',
+      html:`
+        Olá, ${patientExists.user.name}! <br />
+        Gostaria de confirmar o <b>agendamento de consulta</b> 
+        para o dia ${formatDate(data.date, 'DD/MM/YYYY')} as ${formatDate(data.date, 'HH:mm')}
+        com o doutor <b>${doctorExists.user.name}</b>
+      `
+    });
   }
 }
 

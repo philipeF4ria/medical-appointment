@@ -4,6 +4,7 @@ import { IDoctorScheduleRepository } from '../../../doctor/repositories/doctor-s
 import { IDoctorRepository } from '../../../doctor/repositories/doctor.repository';
 import { IPatientRepository } from '../../../patient/repositories/patient.repository';
 import { IAppointmentRepository } from '../../repositories/appointment.repository';
+import { IMailProvider } from '../../../../infra/providers/mail/mail.provider';
 
 import { CreateAppointmentUseCase } from './create-appointment.usecase';
 
@@ -13,6 +14,7 @@ class CreateAppointmentController {
     private doctorRepository: IDoctorRepository,
     private doctorScheduleRepository: IDoctorScheduleRepository,
     private appointmentRepository: IAppointmentRepository,
+    private mailProvider: IMailProvider,
   ){}
 
   async handle(request: Request, response: Response): Promise<Response> {
@@ -25,6 +27,7 @@ class CreateAppointmentController {
         this.doctorRepository,
         this.doctorScheduleRepository,
         this.appointmentRepository,
+        this.mailProvider,
       );
   
       await createAppointmentUseCase.execute(data, userId);

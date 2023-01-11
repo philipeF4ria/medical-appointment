@@ -3,17 +3,22 @@ import { DoctorPrismaRepository } from '../../../doctor/repositories/implementat
 import { PatientPrismaRepository } from '../../../patient/repositories/implementations/prisma/patient.prisma.repository';
 import { AppointmentPrismaRepository } from '../../repositories/implementations/prisma/appointment.prisma.repository';
 import { CreateAppointmentController } from './create-appointment.controller';
+import { 
+  EtherealMailProvider
+} from '../../../../infra/providers/mail/implementations/ethereal.mail.provider';
 
 const patientRepository = new PatientPrismaRepository();
 const doctorRepository = new DoctorPrismaRepository();
 const doctorScheduleRepository = new DoctorScheduleRepository();
 const appointmentRepository = new AppointmentPrismaRepository();
+const etherealMailProvider = new EtherealMailProvider();
 
 const createAppointmentController = new CreateAppointmentController(
   patientRepository,
   doctorRepository,
   doctorScheduleRepository,
-  appointmentRepository
+  appointmentRepository,
+  etherealMailProvider,
 );
 
 export {  createAppointmentController }
