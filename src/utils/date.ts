@@ -38,6 +38,14 @@ function toDate(date: Date) {
     return dayjs(date).toDate();
 }
 
+function startOfDay() {
+    return dayjs().utc().startOf('D').toDate();
+}
+
+function endOfDay() {
+    return dayjs().utc().endOf('D').toDate();
+}
+
 export { 
     validateTime, 
     formatDateHour, 
@@ -47,4 +55,6 @@ export {
     formatDateUTC,
     dateToString,
     toDate,
+    startOfDay,
+    endOfDay,
 }

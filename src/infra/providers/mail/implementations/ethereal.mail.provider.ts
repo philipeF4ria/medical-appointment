@@ -12,8 +12,8 @@ class EtherealMailProvider implements IMailProvider {
           host: 'smtp.ethereal.email',
           port: 587,
           auth: {
-            user: 'elody.runolfsdottir95@ethereal.email',
-            pass: '4wCurw4SJr3hkDHW74'
+            user: 'wilford.auer@ethereal.email',
+            pass: 'bDS6sPe6sKjpqY1rYu'
           }
         });
 
