@@ -19,8 +19,10 @@ class CreatePatientController {
                 this.userRepository,
                 this.patientRepository
             );
+            
+            const avatar = request.file?.filename;
 
-            const result = await createPatientUseCase.create(body);
+            const result = await createPatientUseCase.execute(body, avatar);
 
             return response.json(result);
 

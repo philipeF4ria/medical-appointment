@@ -29,6 +29,7 @@ class UserPrismaRepository implements IUserRepository {
                 name: data.name,
                 username: data.username,
                 password: data.password,
+                avatar: data.avatar,
             }
         });
 

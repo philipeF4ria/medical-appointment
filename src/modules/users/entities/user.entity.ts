@@ -7,6 +7,7 @@ type IUser = {
     name: string;
     username: string;
     password: string;
+    avatar?: string | null;
 }
 
 class User {
@@ -15,6 +16,7 @@ class User {
     username: string;
     id: string;
     isAdmin: boolean;
+    avatar?: string | null;
 
     private constructor(props: IUser) {
         if (!props.username || !props.password) {
@@ -26,6 +28,7 @@ class User {
         this.password = props.password;
         this.id = randomUUID();
         this.isAdmin = false;
+        this.avatar = props.avatar;
     }
 
     static async create(props: IUser) {

@@ -36,7 +36,7 @@ class AppointmentPrismaRepository implements IAppointmentRepository {
       where: {
         date: {
           gte: startOfDay(),
-          lte: endOfDay(),
+          lte: endOfDay(),          
         },
       },
       include: {
